@@ -35,7 +35,7 @@ namespace Markov_Chain_Text_Generator
             }
             else
             {
-                throw new Exception("UnexpectedError in TextMarkovNode." + nameof(AddTransition));
+                throw new Exception("UnexpectedError in " + nameof(TextMarkovNode) + "." + nameof(AddTransition));
             }
 
             _totalUsages += usages;
@@ -59,8 +59,7 @@ namespace Markov_Chain_Text_Generator
                 else
                     p -= edge.Probably;
 
-
-            throw new NotImplementedException();
+            throw new Exception("UnexpectedError in " + nameof(TextMarkovNode) + "." + nameof(GetNextNode));
         }
 
         public override string ToString()
