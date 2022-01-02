@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Markov_Chain_Text_Generator
 {
     public class MarkovEdge <TNode> 
-        where TNode : MarkovNode<string>
+        where TNode : INode<string>
     {
         public int Weight { get; set; }
         public Probability Probably { get; set; }

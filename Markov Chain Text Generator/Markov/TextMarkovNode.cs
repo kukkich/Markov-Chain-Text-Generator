@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Markov_Chain_Text_Generator
 {
-	public class TextMarkovNode : MarkovNode<string>
+	public class TextMarkovNode : INode<string>
 	{
 		public TextMarkovNode AddTransition(TextMarkovNode node, int usages=1)
 		{
@@ -62,7 +62,9 @@ namespace Markov_Chain_Text_Generator
 			}
 		}
 
-		public override string ToString()
+        public string State { get; init; }
+
+        public override string ToString()
 		{
 			var edgesLog = new StringBuilder();
 			if (_edges.Count > 0)
@@ -80,13 +82,9 @@ namespace Markov_Chain_Text_Generator
 		}
 
 		public TextMarkovNode(string state)
-			: base(state)
 		{
+            State = state ?? throw new ArgumentNullException(nameof(state));
 		}
-
-		static private readonly Random _randomDevice = new Random();
-		static private readonly JsonSerializerOptions _serializerOption = new JsonSerializerOptions { WriteIndented = true };
-		static private readonly string _serializerTabs = "  ";
 
 		// With long calculation make it public
 		// and remove it from the end of AddTransition method
@@ -101,6 +99,9 @@ namespace Markov_Chain_Text_Generator
 
 		private readonly List<MarkovEdge<TextMarkovNode>> _edges = new();
 
+		static private readonly Random _randomDevice = new Random();
+		static private readonly JsonSerializerOptions _serializerOption = new JsonSerializerOptions { WriteIndented = true };
+		static private readonly string _serializerTabs = "  ";
 		private int _totalUsages;
 
 	}
