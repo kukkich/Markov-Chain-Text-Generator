@@ -9,6 +9,8 @@ namespace Markov_Chain_Text_Generator
 {
     public class TextMarkovNode : MarkovNode<string>
     {
+        static private Random _randomDevice = new Random();
+
         public TextMarkovNode AddTransition(TextMarkovNode node, int usages=1)
         {
             if (node == null) throw new ArgumentNullException(nameof(node));
