@@ -47,6 +47,10 @@ namespace Markov_Chain_Text_Generator
 
             return AddTransition(new TextMarkovNode(state), usages);
         }
+        public TextMarkovNode GetNextNode()
+        {
+            throw new NotImplementedException();
+        }
 
         public override string ToString()
         {
