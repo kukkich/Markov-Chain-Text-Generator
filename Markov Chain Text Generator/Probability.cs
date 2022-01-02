@@ -18,6 +18,12 @@ namespace Markov_Chain_Text_Generator
         {
             return first.Value != second.Value;
         }
+
+        public static implicit operator double(Probability probably)
+        {
+            return probably.Value;
+        }
+
         public override string ToString()
         {
             return Value.ToString();

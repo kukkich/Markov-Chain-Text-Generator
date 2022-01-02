@@ -51,6 +51,15 @@ namespace Markov_Chain_Text_Generator
         }
         public TextMarkovNode GetNextNode()
         {
+            double p = _randomDevice.NextDouble();
+
+            foreach (var edge in _edges)
+                if (p < edge.Probably)
+                    return edge.End;
+                else
+                    p -= edge.Probably;
+
+
             throw new NotImplementedException();
         }
 
