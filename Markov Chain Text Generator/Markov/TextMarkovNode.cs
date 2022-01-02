@@ -49,17 +49,20 @@ namespace Markov_Chain_Text_Generator
 
             return AddTransition(new TextMarkovNode(state), usages);
         }
-        public TextMarkovNode GetNextNode()
+        public TextMarkovNode NextNode
         {
-            double p = _randomDevice.NextDouble();
+            get 
+            { 
+                double p = _randomDevice.NextDouble();
 
-            foreach (var edge in _edges)
-                if (p < edge.Probably)
-                    return edge.End;
-                else
-                    p -= edge.Probably;
+                foreach (var edge in _edges)
+                    if (p < edge.Probably)
+                        return edge.End;
+                    else
+                        p -= edge.Probably;
 
-            throw new Exception("UnexpectedError in " + nameof(TextMarkovNode) + "." + nameof(GetNextNode));
+                throw new Exception("UnexpectedError in " + nameof(TextMarkovNode) + "." + nameof(NextNode));
+            }
         }
 
         public override string ToString()
