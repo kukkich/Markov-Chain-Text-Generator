@@ -24,4 +24,10 @@ Console.WriteLine(fish);
 Console.WriteLine(one);
 Console.WriteLine(two);
 
+Console.WriteLine(fish.NextNode.State);
+Console.WriteLine(fish.NextNode.State);
+Console.WriteLine(fish.NextNode.State);
+Console.WriteLine(fish.NextNode.State);
+
+
 

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace Markov_Chain_Text_Generator
 {
@@ -49,6 +46,8 @@ namespace Markov_Chain_Text_Generator
 
             return AddTransition(new TextMarkovNode(state), usages);
         }
+
+        [JsonIgnore]
         public TextMarkovNode NextNode
         {
             get 
