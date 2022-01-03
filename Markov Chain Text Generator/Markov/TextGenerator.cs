@@ -14,14 +14,19 @@ namespace Markov_Chain_Text_Generator.Markov
 			while (!streamReader.EndOfStream)
 				foreach (string word in streamReader
 						?.ReadLine()
-						?.Split(" ", StringSplitOptions.RemoveEmptyEntries) ?? throw new NullReferenceException()
+						?.Split(" ", StringSplitOptions.RemoveEmptyEntries)
+						?? throw new NullReferenceException()
 					)
 					Push(word);
 		}
 
 		public TextGenerator (string text)
 		{
-			throw new NotImplementedException ();
+			foreach (string word in text
+						?.Split(" ", StringSplitOptions.RemoveEmptyEntries)
+						?? throw new ArgumentNullException()
+					)
+				Push(word);
 		}
 
 		private void Push(string word)
