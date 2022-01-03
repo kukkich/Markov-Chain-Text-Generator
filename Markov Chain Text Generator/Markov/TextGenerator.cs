@@ -9,22 +9,14 @@ namespace Markov_Chain_Text_Generator.Markov
 {
 	internal class TextGenerator
 	{
-		private static readonly Regex _extraSpacesRegex = new Regex(@"\s+", RegexOptions.Compiled);
-		private static readonly string _extraSpacesReplaceTarget = " ";
-
-		private void Push(string word)
-		{
-			throw new NotImplementedException();
-		}
-
-		private string RemoveExtraSpaces (string str)
-		{
-			return _extraSpacesRegex.Replace(str, _extraSpacesReplaceTarget);
-		}
-
 		public TextGenerator (StreamReader streamReader)
 		{
-			throw new NotImplementedException ();
+			while (!streamReader.EndOfStream)
+				foreach (string word in streamReader
+						?.ReadLine()
+						?.Split(" ", StringSplitOptions.RemoveEmptyEntries) ?? throw new NullReferenceException()
+					)
+					Push(word);
 		}
 
 		public TextGenerator (string text)
@@ -32,6 +24,10 @@ namespace Markov_Chain_Text_Generator.Markov
 			throw new NotImplementedException ();
 		}
 
+		private void Push(string word)
+		{
+			throw new NotImplementedException();
+		}
 		private TextStartMarkovNode _start;
 		private TextMarkovNode _lastReadNode;
 	}

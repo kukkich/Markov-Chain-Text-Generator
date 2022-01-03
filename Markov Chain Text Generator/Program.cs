@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using Markov_Chain_Text_Generator;
+using Markov_Chain_Text_Generator.Markov;
 
 namespace Markov_Chain_Text_Generator
 {
@@ -44,10 +45,14 @@ namespace Markov_Chain_Text_Generator
 			using (StreamReader streamReader = new StreamReader("test.txt"))
 			{
 				while (!streamReader.EndOfStream)
-					foreach (string word in streamReader.ReadLine().Split(" "))
-						if (!isSpaces(word))
-							Console.WriteLine("word:" + word);
+					foreach (string word in streamReader
+						?.ReadLine()
+						?.Split(" ", StringSplitOptions.RemoveEmptyEntries) ?? throw new NullReferenceException()
+						)
+						Console.WriteLine($"word:{word}");
 			}
+
+
 		}
 
 		public static bool isSpaces(string str)
