@@ -4,66 +4,27 @@ using Markov_Chain_Text_Generator.Markov;
 
 namespace Markov_Chain_Text_Generator
 {
-	class Programm
-	{
-		public static void Main()
-		{
-			var fish = new TextMarkovNode("fish");
-			var one = new TextMarkovNode("one");
-			var two = new TextMarkovNode("two");
-			var three = new TextMarkovNode("three");
+    class Programm
+    {
+        public static void Main()
+        {
+            // string text = "fish one fish two fish three fish one fish one fish";
 
-
-			fish.AddTransition(one);
-			fish.AddTransition(two);
-			fish.AddTransition(three);
-			fish.AddTransition(fish);
-
-
-			Console.WriteLine(fish);
-
-			var dict = new Dictionary<string, int>
-			{
-				["one"] = 0,
-				["two"] = 0,
-				["three"] = 0,
-				["fish"] = 0,
-			};
-
-			for (int i = 0; i < 1000; i++)
-			{
-				dict[fish.NextNode.State]++;
-			}
-
-			Console.WriteLine(
-					JsonSerializer.Serialize<Dictionary<string, int>>(
-						dict,
-						new JsonSerializerOptions { WriteIndented = true }
-					)
-				);
-
-			using (StreamReader streamReader = new StreamReader("test.txt"))
-			{
-				while (!streamReader.EndOfStream)
-					foreach (string word in streamReader
-						?.ReadLine()
-						?.Split(" ", StringSplitOptions.RemoveEmptyEntries) ?? throw new NullReferenceException()
-						)
-						Console.WriteLine($"word:{word}");
-			}
-
-
-		}
-
-		public static bool isSpaces(string str)
-		{
-			foreach (char sym in str)
+            // from file
+            using (StreamReader streamReader = new StreamReader("test.txt"))
             {
-				if (sym != ' ') return false;
-			}
-			return true;
-		}
-	}
+                //while (!streamReader.EndOfStream)
+                //	foreach (string word in streamReader
+                //			?.ReadLine()
+                //			?.Split(" ", StringSplitOptions.RemoveEmptyEntries) ?? throw new NullReferenceException()
+                //		)
+                TextGenerator generator = new(streamReader);
+                Console.WriteLine(generator.Generate(40));
+            }
+
+
+        }
+    }
 }
 
 
