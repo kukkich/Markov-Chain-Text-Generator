@@ -12,7 +12,7 @@ namespace Markov_Chain_Text_Generator
 			if (usages < 0) throw new ArgumentOutOfRangeException(nameof(usages));
 
 			int childIndex;
-			TextMarkovNode result = null;
+			TextMarkovNode result;
 
 			for (childIndex = 0; childIndex < _edges.Count; childIndex++)
 				if (_edges[childIndex].End.State == node.State)
@@ -92,17 +92,15 @@ namespace Markov_Chain_Text_Generator
 		private void RecalculateProbabilities()
 		{
 			foreach (var edge in _edges)
-			{
 				edge.Probably = new Probability((double)edge.Weight / _totalUsages);
-			}
 		}
 
 		private readonly List<MarkovEdge<TextMarkovNode>> _edges = new();
+		private int _totalUsages;
 
 		static private readonly Random _randomDevice = new Random();
 		static private readonly JsonSerializerOptions _serializerOption = new JsonSerializerOptions { WriteIndented = true };
 		static private readonly string _serializerTabs = "  ";
-		private int _totalUsages;
 
 	}
 }

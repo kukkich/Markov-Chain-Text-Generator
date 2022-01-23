@@ -57,7 +57,7 @@ namespace Markov_Chain_Text_Generator.Markov
 
 		private void Push(string word)
 		{
-			if (word == null) throw new ArgumentNullException();
+			if (word == null) throw new ArgumentNullException(nameof(word));
 			
 			TextMarkovNode? addableNode;
 			
